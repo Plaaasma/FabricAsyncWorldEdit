@@ -311,14 +311,10 @@ public class BlockType implements Keyed, Pattern {
             Property<?> prop = iter.getKey();
             Object value = iter.getValue();
 
-            /*
-             * TODO:
-             * This is likely wrong. The only place this seems to currently (Dec 23 2018)
-             * be invoked is via ForgeWorld, and value is a String when invoked there...
-             */
             AbstractProperty btp = this.settings.propertiesMap.get(prop.getName());
             checkArgument(btp != null, "%s has no property named %s", this, prop.getName());
-            id = btp.modify(id, btp.getValueFor((String) value));
+            Object typedValue = value instanceof String string ? btp.getValueFor(string) : value;
+            id = btp.modify(id, typedValue);
         }
         return withStateId(id);
         //FAWE end
