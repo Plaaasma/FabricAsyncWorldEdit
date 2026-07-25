@@ -318,7 +318,7 @@ public class BlockType implements Keyed, Pattern {
              */
             AbstractProperty btp = this.settings.propertiesMap.get(prop.getName());
             checkArgument(btp != null, "%s has no property named %s", this, prop.getName());
-            id = btp.modify(id, btp.getValueFor((String) value));
+            id = btp.modify(id, value);
         }
         return withStateId(id);
         //FAWE end
